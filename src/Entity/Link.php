@@ -16,6 +16,12 @@ class Link
     #[ORM\Column(length: 255)]
     private ?string $link = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isExec = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $is_exec = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +35,18 @@ class Link
     public function setLink(string $link): self
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function isIsExec(): ?bool
+    {
+        return $this->isExec;
+    }
+
+    public function setIsExec(?bool $isExec): self
+    {
+        $this->isExec = $isExec;
 
         return $this;
     }

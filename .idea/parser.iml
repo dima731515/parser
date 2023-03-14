@@ -57,6 +57,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dependency-injection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/masterminds/html5" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -62,60 +62,12 @@ class ReaderCommand extends Command
             throw new \Exception('Invalid Argument');
         }
 
-        $url = parse_url($baseUrl);
-        if(!$url['host']) throw new \Exception('Argument invalid');
+        $projectRepo = $this->entityManager->getRepository(Project::class);
 
-        $host  = str_replace('www.', '', $url['host']);
-        $title = str_replace('.', '_', $host);
+        $projectRepo->init($baseUrl, $projectName);
 
-        $repository = $this->entityManager->getRepository(Project::class);
+        die();
 
-        $project = $repository->findOneBy([
-            'title'    => $projectName ?? $host,
-            'base_url' => $host
-        ]);
-
-        if(!$project){
-            $project = new Project();
-            $project->setBaseUrl($host);
-            $project->setTitle($projectName ?? $host);
-            $project->setPath($projectName ?? $title);
-            $this->entityManager->persist($project);
-            $project = $this->entityManager->flush();
-        }
-        // Каталог проекта
-        $project->createFolder();
-
-        // Запрос
-        $url   = 'https://' . $host;
-        $arUrl = parse_url($url);
-        $response = $this->client->request(
-            'GET',
-            $url
-        );
-
-        if(200 !== $response->getStatusCode()){
-            throw new \Exception('что-то пошло не так');
-        }
-        $headers = $response->getHeaders();
-        foreach($headers as $key => $value){
-            if('content-type' === $key){
-                // content type array
-            }
-            if('set-coolie' === $key){
-                //
-            }
-        }
-        $pageContent = $response->getContent();
-        $path = 'project/tbs/' . 'index';
-
-        $page = new Page();
-        $page->setTitle('test');
-        $page->setPath($path);
-
-        $this->entityManager->persist($project);
-        $page = $this->entityManager->flush();
-        $page->saveFile($pageContent);
 
         echo '<pre>';
         print_r($response->getStatusCode());
